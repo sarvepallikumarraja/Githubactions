@@ -1,0 +1,16 @@
+name: basic
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: string
+        description: "demojdescription"
+        default: "repository"
+        required: true
+jobs:
+  demojob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4

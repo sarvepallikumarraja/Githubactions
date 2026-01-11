@@ -1,0 +1,38 @@
+# I am a workflow that demonstrates how to output the different context objects
+
+name: Variables and Context
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  push:
+    branches: [main]
+
+     
+  #step/job output variables
+jobs:
+  job2:
+    runs-on: ubuntu-latest
+      
+    outputs:
+      output1: ${{ steps.step1.outputs.step1value }}
+      output2: ${{ steps.step2.outputs.step2value }}
+      
+    steps:
+      - name: Step 1
+        id: step1
+          # run: echo "::set-output name=step1value::hello"
+        run: echo "step1value=hello" >> $GITHUB_OUTPUT
+
+      - name: Step 2
+        id: step2
+          # run: echo "::set-output name=step2value::world"
+        run: |
+          echo "step2value=world" >> $GITHUB_OUTPUT
+          ls "${{ github.workspace }}"
+    
+  job3:
+    runs-on: ubuntu-latest
+    needs: job2
+    steps:
+    - run: echo ${{needs.job2.outputs.output1}} ${{needs.job2.outputs.output2}}
