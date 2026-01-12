@@ -5,7 +5,7 @@ on:
     inputs:
       name:
         type: string
-        description: "demodescription"
+        description: "demojdescription"
         default: "repository"
         required: true
 jobs:
