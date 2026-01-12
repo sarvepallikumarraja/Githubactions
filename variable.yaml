@@ -1,0 +1,25 @@
+name: varsandenv
+
+on: 
+  workflow_dispatch:
+    inputs:
+      name:
+        type: string
+        default: "repository"
+env:
+  registory: docker.io
+  repository: kumar08401
+
+jobs:
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name:
+        use: actions/checkout@v4
+      - name: export the value
+        id: exportid
+        run: echo "savevalue=kumar" >> $kumar
+        run: echo "step1value=hello" >> $GITHUB_OUTPU
+    outputs:
+      output1: ${{steps.exportid.outputs.savevalue}}
+     

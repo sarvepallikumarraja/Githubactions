@@ -1,0 +1,59 @@
+name: demo_workflow
+
+on:
+ push:
+   branches:
+     - main
+OR
+  workflow_dispatch:
+    input:
+      name: stringtest
+      type: string
+      description:
+      default: "demostring"
+
+      name: demochoice
+      resuired: true
+      type: choice
+      default: "new_york"
+      options:
+        - newyork
+        - seattle
+
+      name: demo bollen
+      required: true
+      type: Bollean
+
+jobs:
+ demojob1:
+  runs-on: [ubuntu,windows-lstes,macos]
+  steps:
+    - name:
+      if: github.event.input.demo_bollen == "true"
+      run: |
+        echo ${{github.event.demostring}}
+        echo ${{github.event.demochoicce}}
+        echo ${{github.event.demobollen}}
+  
+  demojob2:
+  runs-on: [ubuntu,windows-lstes,macos]
+  needs:
+   - job1
+  steps:
+    - name:
+      run: |
+        echo ${{github.event.demostring}}
+        echo ${{github.event.demochoicce}}
+        echo ${{github.event.demobollen}}
+  
+  demojob3:
+  runs-on: [ubuntu,windows-lstes,macos]
+  needs:
+   - job2
+  steps:
+    - name:
+      run: |
+        echo ${{github.event.demostring}}
+        echo ${{github.event.demochoicce}}
+        echo ${{github.event.demobollen}}
+      
